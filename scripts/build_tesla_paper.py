@@ -17,8 +17,8 @@ pages=[
 [("12. Conclusion","Tesla combines observable industrial performance with an unusually influential technology narrative. Elon Musk shapes the market's perception of ambitious new businesses, but an investment assessment must evaluate each opportunity according to cash flow, execution and risk."),("References","Tesla 2025 Form 10-K; Tesla Q2 2026 Vehicle Production and Deliveries release; Tesla Q2 2026 Form 10-Q; Tesla Investor Relations. This is an independent educational research note, not investment advice."),("Final analytical principle","Separate current operations from speculative option value, report scenario assumptions openly, and avoid turning a public personality's impact on market attention into an unsupported causal assertion about daily stock returns.")]
 ]
 def para(text,y):
- c.setFont("Times-Roman",11)
- for line in simpleSplit(text,"Times-Roman",11,490):
+ c.setFont("Times-Roman",10.6)
+ for line in simpleSplit(text,"Times-Roman",10.6,490):
   c.drawString(61,y,line);y-=16
  return y-25
 def diagram(kind,y):
@@ -55,6 +55,6 @@ for i,page in enumerate(pages):
  for j,(title,body) in enumerate(page):
   c.setFont("Times-Bold",12);c.drawString(61,y,title);y-=20
   y=para(body,y)
-  if j==1 and i>0:y=diagram(i-1,y)
+  if j==1 and i>0 and y>255:y=diagram(i-1,y)
  c.line(59,40,554,40);c.setFont("Times-Italic",8);c.drawString(61,26,"Independent educational research note. Not investment advice.");c.drawRightString(550,26,str(i+1));c.showPage()
 c.save()
