@@ -1,0 +1,29 @@
+name: Publish VANTA PDF
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/build_vanta_paper.py'
+      - '.github/workflows/publish-vanta.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install reportlab
+      - run: python scripts/build_vanta_paper.py
+      - name: Publish generated PDF
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pdf/achive-003.pdf
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish VANTA research PDF"
+            git push
+          fi
