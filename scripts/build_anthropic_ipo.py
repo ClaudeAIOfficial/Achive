@@ -61,6 +61,14 @@ for i,(heading,overview) in enumerate(data):
   story.append(Paragraph(extra[(i+j)%len(extra)],body))
  if i in (1,2,3,5,7,8):
   story.append(Fig(i));story.append(Paragraph('Figure '+str(i)+'. Simplified valuation relationship.',small))
+from reportlab.pdfgen import canvas as pdfcanvas
+class TitledCanvas(pdfcanvas.Canvas):
+ def __init__(self,*args,**kwargs):
+  super().__init__(*args,**kwargs)
+  self.setTitle("Anthropic's Prospective IPO: Frontier AI Economics and the Valuation of Claude")
+  self.setAuthor("Achive Research Notes")
+  self.setSubject("Frontier AI economics and a prospective Anthropic IPO")
+  self.setCreator("Achive Research Notes")
 doc=SimpleDocTemplate(str(P),pagesize=letter,leftMargin=54,rightMargin=54,topMargin=51,bottomMargin=45)
-doc.build(story,onFirstPage=footer,onLaterPages=footer)
+doc.build(story,onFirstPage=footer,onLaterPages=footer,canvasmaker=TitledCanvas)
 print(P,P.stat().st_size)
