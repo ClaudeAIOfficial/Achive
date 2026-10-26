@@ -45,6 +45,9 @@ class Fig(Flowable):
     last=(x,y)
   c.setFillColor(colors.black);c.setFont('Times-Italic',8);c.drawCentredString(235,8,'Conceptual schematic; not empirical share-price data')
 def footer(c,d):
+ c.setTitle("Anthropic's Prospective IPO: Frontier AI Economics and the Valuation of Claude")
+ c.setAuthor("Achive Research Notes")
+ c.setSubject("Anthropic IPO research and frontier AI economics")
  c.saveState();c.setFont('Times-Roman',8);c.drawString(54,756,"Anthropic's Prospective IPO");c.line(54,751,558,751)
  c.line(54,37,558,37);c.drawRightString(558,24,str(d.page));c.restoreState()
 story=[]
